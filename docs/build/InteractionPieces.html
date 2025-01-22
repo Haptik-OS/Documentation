@@ -1,0 +1,684 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Gestures" href="Gestures.html" /><link rel="prev" title="Description of the Haptikos Player Prefab and Its Role" href="HaptikosPlayerDescription.html" />
+
+    <!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
+        <title>Interactable Objects - Haptikos Documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=654bb545" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">Haptikos Documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="_static/Haptikos.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">Haptikos Documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Explanation.html">Explanation of the SDK’s Scope and Applications</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Haptikos Core Application</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="HaptikosCoreApp.html">Haptikos Core Application</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="QuickStartGuide.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstalationGuideinUnity.html">Installation Guide in Unity</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Core Concepts</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="HaptikosPlayerDescription.html">Description of the Haptikos Player Prefab and Its Role</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Interactable Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Gestures.html">Gestures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CurveDesign.html">Haptics</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Tutorial.html">Tutorial: Building a Scene with Haptikos</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ScriptsDocs.html">Valuable Scripts</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="_sources/InteractionPieces.md.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="interactable-objects">
+<h1>Interactable Objects<a class="headerlink" href="#interactable-objects" title="Link to this heading">¶</a></h1>
+<p>The SDK contains premade interaction pieces, with haptic feedback, that can be used directly to create simple yet effective everyday interactions. These include:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Haptikos</span> <span class="pre">Table</span> <span class="pre">Button</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Haptikos</span> <span class="pre">Dimmer</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Haptikos</span> <span class="pre">Table</span> <span class="pre">Switch</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Haptikos</span> <span class="pre">Wall</span> <span class="pre">Switch</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Haptikos</span> <span class="pre">Lever</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Haptikos</span> <span class="pre">Slider</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Haptikos</span> <span class="pre">Grabbable</span> <span class="pre">Object</span></code></p></li>
+</ul>
+<section id="haptikos-table-button">
+<h2>Haptikos Table Button<a class="headerlink" href="#haptikos-table-button" title="Link to this heading">¶</a></h2>
+<p>This is the simplest of all interactions: a table button that can be pressed using a hand.</p>
+<div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+  <img src="_static/Table_Button.png" alt="Table_Button" width="400" />
+  <p style="font-size: 14px; color: gray;">Figure 1: Haptikos Table Button</p>
+</div>
+<p>The button consists of multiple scripts that execute parts of the logic. These scripts are easily configurable and ready to use in other interactables. Their simplicity facilitates the creation of interactions with ease.</p>
+<section id="haptikos-table-button-hierarchy-and-scripts">
+<h3>Haptikos Table Button Hierarchy and Scripts<a class="headerlink" href="#haptikos-table-button-hierarchy-and-scripts" title="Link to this heading">¶</a></h3>
+<div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+  <img src="_static/Haptikos_Table_Button_Hierarchy.png" alt="Haptikos_Table_Button_Hierarchy" width="300" />
+  <p style="font-size: 14px; color: gray;">Figure 2: Haptikos Table Button Hierarchy</p>
+</div>
+<p>The scripts that the <code class="docutils literal notranslate"><span class="pre">Haptikos_Table_Button</span></code> contains are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Haptikos</span> <span class="pre">Button</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Haptic</span> <span class="pre">Feedback</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Rigidbody</span> <span class="pre">Locker</span></code></p></li>
+</ul>
+<div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+  <img src="_static/Pressable_Button_GO_Scripts.png" alt="Haptikos_Table_Button_Scripts" width="500" />
+  <p style="font-size: 14px; color: gray;">Figure 3: Haptikos Table Button Scripts</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Haptikos</span> <span class="pre">Button</span></code> script is responsible for moving the button within the desired limits. The <code class="docutils literal notranslate"><span class="pre">Press</span> <span class="pre">Length</span></code> variable determines the limits of the button. When the button reaches the bottom and is pressed fully, the <code class="docutils literal notranslate"><span class="pre">Button</span> <span class="pre">Press</span> <span class="pre">Event</span></code> will be triggered. Additionally, there are two more events:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">OnHapticFeedbackStarted</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">OnHapticFeedbackStartAndEnd</span></code></p></li>
+</ul>
+<p>These events fire when the <code class="docutils literal notranslate"><span class="pre">Haptic</span> <span class="pre">Feedback</span></code> of the button is triggered.</p>
+<p>The button also contains a <code class="docutils literal notranslate"><span class="pre">SpringJoint</span></code> and a <code class="docutils literal notranslate"><span class="pre">Rigidbody</span></code> component, which are Unity elements used to make the button behave more realistically.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Haptic</span> <span class="pre">Feedback</span></code> component is responsible for triggering the haptic feedback in the button.</p>
+<div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+  <img src="_static/rb_lock.png" alt="Lock Rigodbody Zone Gameobject" width="400" />
+  <p style="font-size: 14px; color: gray;">Figure 4: Lock Rigodbody Zone Gameobject</p>
+</div>
+<p>The next significant GameObject containing logic is the <code class="docutils literal notranslate"><span class="pre">Lock</span> <span class="pre">Rigidbody</span> <span class="pre">Zone</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Lock</span> <span class="pre">Rigidbody</span> <span class="pre">Zone</span></code> is responsible for locking the button when it is touched from underneath, preventing unintended movement. It contains the following:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">InteractionDetector</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RigidbodyLocker</span></code></p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">InteractionDetector</span></code> is a highly useful component for creating simple interactions. It provides information when an item is touched and allows the selection of specific parts of the hand as contact points. For example, selecting <code class="docutils literal notranslate"><span class="pre">Finger_Tip</span></code> as the interaction part ensures that the interaction is triggered only when the item is touched with the fingertips.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">InteractionDetector</span></code> includes the following two important events to expand interaction logic:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">OnObjectStartedTouching</span></code>: Detects when the user starts touching an object.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">OnObjectStoppedTouching</span></code>: Triggers when all fingers are removed from the object.</p></li>
+</ul>
+<div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+  <img src="_static/Button_bottom_locker_Collider.png" alt="Button_bottom_locker_Collider" width="400" />
+  <p style="font-size: 14px; color: gray;">Figure 5: Collider on bottom of the button stopping the button from moving</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">RigidbodyLocker</span></code> component works in conjunction with the <code class="docutils literal notranslate"><span class="pre">InteractionDetector</span></code>. It locks the <code class="docutils literal notranslate"><span class="pre">Rigidbody</span></code> when the interaction conditions defined in the <code class="docutils literal notranslate"><span class="pre">InteractionDetector</span></code> are met. This ensures the button remains stationary, even if the collider on the bottom of the button is touched.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="haptikos-dimmer">
+<h2>Haptikos Dimmer<a class="headerlink" href="#haptikos-dimmer" title="Link to this heading">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">Haptikos</span> <span class="pre">Dimmer</span></code> is a premade interactive component that allows the simulation of the rotation of a dimmer by grabbing and rotating its circular handle. This interaction provides precise feedback and control by delivering haptic feedback to the fingers upon contact with the dimmer and triggering haptic responses whenever the dimmer snaps to or passes an indication value.</p>
+<div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+  <img src="_static/Haptikos_Dimmer.png" alt="Haptikos_Dimmer" width="300" />
+  <p style="font-size: 14px; color: gray;">Figure 1: Haptikos Dimmer</p>
+</div>
+<section id="haptikos-dimmer-hierarchy-and-scripts">
+<h3>Haptikos Dimmer Hierarchy and Scripts<a class="headerlink" href="#haptikos-dimmer-hierarchy-and-scripts" title="Link to this heading">¶</a></h3>
+<div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+  <img src="_static/Haptikos_Dimmer_Hierarchy.png" alt="aptikos_Dimmer_Hierarchy" width="300" />
+  <p style="font-size: 14px; color: gray;">Figure 2: Haptikos Dimmer Hierarchy</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Haptikos</span> <span class="pre">Dimmer</span></code> contains the following scripts:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Haptikos</span> <span class="pre">Dimmer</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Dimmer</span> <span class="pre">Indicator</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Dimmer</span> <span class="pre">Handle</span></code></p></li>
+</ul>
+<div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+  <img src="_static/Haptikos_Dimmer_Scripts.png" alt="aptikos_Dimmer_Script" width="500" />
+  <p style="font-size: 14px; color: gray;">Figure 3: Haptikos Dimmer Script</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Haptikos</span> <span class="pre">Dimmer</span></code> is the primary GameObject in the hierarchy responsible for handling user interaction with a virtual dimmer. It provides haptic feedback when interacting with the dimmer, triggering haptic events based on changes in the dimmer’s rotation or indicator value. The dimmer controls the rotation of its handle and maps this rotation to specific dimmer values, ensuring precise control.</p>
+<p>Additionally, the <code class="docutils literal notranslate"><span class="pre">Haptikos</span> <span class="pre">Dimmer</span></code> supports snapping functionality, aligning the handle to the nearest valid indicator value after interaction ends. It adjusts the handle’s rotation dynamically based on the relative motion of the user’s hand, enhancing interactivity.</p>
+<p>A UnityEvent, <code class="docutils literal notranslate"><span class="pre">OnDimmerValueChanged</span></code>, is invoked whenever the dimmer value changes, allowing for external custom behaviors to be linked to these changes.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Dimmer</span> <span class="pre">Indicator</span></code> script handles the behavior of the <code class="docutils literal notranslate"><span class="pre">Dimmer</span> <span class="pre">Indicator</span></code> in the Haptikos system. It detects collisions with objects named <code class="docutils literal notranslate"><span class="pre">Indication</span></code> and updates the slider value of the associated <code class="docutils literal notranslate"><span class="pre">Haptikos</span> <span class="pre">Dimmer</span></code> based on the parsed value from the collided object’s name.</p>
+<div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+  <img src="_static/Dimmer_Handle_Script.png" alt="Dimmer_Handle_Script" width="500" />
+  <p style="font-size: 14px; color: gray;">Figure 4: Dimmer Handle Script</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Dimmer</span> <span class="pre">Handle</span></code> script manages the interaction logic for grabbing and controlling the Haptikos Dimmer’s handle. It ensures proper handling of grab events, validates interactions, and resets the handle state when necessary. Specifically, it detects when the handle is grabbed by validating that both a thumb and another finger are touching the handle and that all interacting fingers belong to the same hand.</p>
+<p>It tracks the position and rotation of the dimmer handle relative to the user’s hand and updates the handle’s rotation based on the user’s hand movement.</p>
+<p>It also monitors for entering or exiting collisions with the user’s fingers and triggers haptic feedback when fingers interact with the handle.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="haptikos-table-switch">
+<h2>Haptikos Table Switch<a class="headerlink" href="#haptikos-table-switch" title="Link to this heading">¶</a></h2>
+<p>Another ready-made interactable object is a table switch.</p>
+<div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+  <img src="_static/Haptikos_Switch.png" alt="Haptikos Table Switch" width="400" />
+  <p style="font-size: 14px; color: gray;">Figure 1: Haptikos Table Switch</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Haptikos</span> <span class="pre">Table</span> <span class="pre">Switch</span></code> contains the following hierarchy:</p>
+<div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+  <img src="_static/table_sw.png" alt="Haptikos_Table_Switch_Hierarchy" width="200" />
+  <p style="font-size: 14px; color: gray;">Figure 2: Haptikos Table Switch Hierarchy</p>
+</div>
+<section id="haptikos-table-switch-hierarchy-and-scripts">
+<h3>Haptikos Table Switch Hierarchy and Scripts<a class="headerlink" href="#haptikos-table-switch-hierarchy-and-scripts" title="Link to this heading">¶</a></h3>
+<p>All the logic is contained in the <code class="docutils literal notranslate"><span class="pre">HandleRod</span></code> GameObject.</p>
+<div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+  <img src="_static/state_changer.png" alt="state_changer" width="400" />
+  <p style="font-size: 14px; color: gray;">Figure 3: The combination of scripts creating the switch</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Haptikos</span> <span class="pre">Table</span> <span class="pre">Switch</span></code> logic is a combination of 3 scripts:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">StateChanger</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">InteractionDetector</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">InteractionDelayer</span></code></p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">StateChanger</span></code> script is used to control the On and Off states of a GameObject by transitioning it between specified positions. Both the start and end states of the GameObject are provided as inputs to the script. These states are visually highlighted in Figure 4 (color is used for demonstration purposes only).</p>
+<div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+  <img src="_static/Haptikos_ON_OFF_State.png" alt="Haptikos_ON_OFF_State" width="300" />
+  <p style="font-size: 14px; color: gray;">Figure 4: On & Off State of the switch</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">InteractionDelayer</span></code> script makes the interaction available again after a specified delay. In the case of the switch, this delay is set to 0.5 seconds. Without the <code class="docutils literal notranslate"><span class="pre">InteractionDelayer</span></code>, repeated touches on the object could trigger multiple interactions, making it difficult to control the interaction’s behavior. The <code class="docutils literal notranslate"><span class="pre">InteractionDelayer</span></code> prevents this issue by regulating interaction timing.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="haptikos-wall-switch">
+<h2>Haptikos Wall Switch<a class="headerlink" href="#haptikos-wall-switch" title="Link to this heading">¶</a></h2>
+<p>The wall switch is similar to the normal switch but includes different scripts to introduce variation and relies solely on transform rotations to create a more realistic and immersive experience for the user.</p>
+<div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+  <img src="_static/Haptikos_Wall_Switch.png" alt="Haptikos_Wall_Switch" width="300" />
+  <p style="font-size: 14px; color: gray;">Figure 1: Haptikos Wall Switch</p>
+</div>
+<section id="haptikos-wall-switch-hierarchy-and-scripts">
+<h3>Haptikos Wall Switch Hierarchy and Scripts<a class="headerlink" href="#haptikos-wall-switch-hierarchy-and-scripts" title="Link to this heading">¶</a></h3>
+<p>The hierarchy of the <code class="docutils literal notranslate"><span class="pre">Haptikos</span> <span class="pre">Wall</span> <span class="pre">Switch</span></code> is the following:</p>
+<div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+  <img src="_static/Haptikos_Wall_Switch_Hierarchy.png" alt="" width="300" />
+  <p style="font-size: 14px; color: gray;">Figure 2: Haptikos Wall Switch Hierarchy</p>
+</div>
+<p>It also contains the following scripts:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Haptikos_SwitchButton</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HapticFeedback</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Haptikos_SwitchButtonArea</span></code></p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">Haptikos</span> <span class="pre">Wall</span> <span class="pre">Switch</span></code> script determines whether it is in the On or Off state and then adjusts the visibility of the corresponding collider accordingly. The collider plays a crucial role in the <code class="docutils literal notranslate"><span class="pre">Haptikos_SwitchButtonArea</span></code> script (contained within the <code class="docutils literal notranslate"><span class="pre">Area1</span></code> and <code class="docutils literal notranslate"><span class="pre">Area2</span></code> GameObjects). This script triggers the <code class="docutils literal notranslate"><span class="pre">OnTriggerEnter</span></code> function when touched, updating the <code class="docutils literal notranslate"><span class="pre">Haptikos_SwitchButton</span></code> script to toggle the switch’s state between On and Off.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="haptikos-lever">
+<h2>Haptikos Lever<a class="headerlink" href="#haptikos-lever" title="Link to this heading">¶</a></h2>
+<div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+  <img src="_static/Haptikos_Lever.png" alt="Haptikos_Lever" width="300" />
+  <p style="font-size: 14px; color: gray;">Figure 1: Haptikos Lever</p>
+</div>
+<p>Due to its complexity, the lever uses <code class="docutils literal notranslate"><span class="pre">Unity</span> <span class="pre">Physics</span></code> more than the other components. It uses a hinge joint to connect 2 GameObjects and limits where the object can rotate. Learn more about hinge joints <a class="reference external" href="https://docs.unity3d.com/Manual/class-HingeJoint.html">here</a>.</p>
+<section id="haptikos-lever-hierarchy-and-scripts">
+<h3>Haptikos Lever Hierarchy and Scripts<a class="headerlink" href="#haptikos-lever-hierarchy-and-scripts" title="Link to this heading">¶</a></h3>
+<p>The hierarchy of the lever can be seen here:</p>
+<div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+  <img src="_static/Haptikos_Lever_Hierarchy.png" alt="Haptikos Lever Hierarchy" width="200" />
+  <p style="font-size: 14px; color: gray;">Figure 2: Haptikos Lever Hierarchy</p>
+</div>
+<p>Some GameObjects of the hierarchy only contain models, while others also contain scripts or Unity components. The base of the <code class="docutils literal notranslate"><span class="pre">Haptikos</span> <span class="pre">Lever</span></code> contains the <code class="docutils literal notranslate"><span class="pre">Hinge</span> <span class="pre">Joint</span></code> which is responsible for connecting the <code class="docutils literal notranslate"><span class="pre">Base</span></code> and the <code class="docutils literal notranslate"><span class="pre">HandleRod</span></code> GameObjects.</p>
+<p>The lever contains the following scripts:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Haptikos_Lever</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LeverHandle</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LeverRod</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HapticFeedback</span></code></p></li>
+</ul>
+<section id="id1">
+<h4>Haptikos Lever<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h4>
+<div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+  <img src="_static/Haptikos_Lever_Script.png" alt="Haptikos Lever Script" width="400" />
+  <p style="font-size: 14px; color: gray;">Figure 3: Haptikos Lever Script</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Haptikos</span> <span class="pre">Lever</span></code> is at the top object of the hierarchy and it is responsible for providing the <code class="docutils literal notranslate"><span class="pre">OnLeverValueEvent</span></code>, which can be utilized to understand where the <code class="docutils literal notranslate"><span class="pre">Haptikos</span> <span class="pre">Lever</span></code> is compared to its limits. It uses the Limits of the <code class="docutils literal notranslate"><span class="pre">Hinge</span> <span class="pre">Joint</span></code> to calculate the starting and final position of the lever.</p>
+</section>
+<section id="lever-handle">
+<h4>Lever Handle<a class="headerlink" href="#lever-handle" title="Link to this heading">¶</a></h4>
+<div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+  <img src="_static/Lever_Handle_Script.png" alt="Lever_Handle_Script" width="700" />
+  <p style="font-size: 14px; color: gray;">Figure 4: Lever Handle Script</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Lever</span> <span class="pre">Handle</span></code> facilitates interaction with a virtual lever by allowing the user to grab and move the lever handle. Upon being grabbed, the lever attaches to the user’s hand, and when moved beyond a certain threshold, it snaps back to its original position, effectively simulating the behavior of a physical lever mechanism.</p>
+<p>The LeverHandle also takes into account <code class="docutils literal notranslate"><span class="pre">HapticFeedback</span></code> since it is a <code class="docutils literal notranslate"><span class="pre">HapticItem</span></code> and triggers the haptic feedback when the user is in the position to move the lever.</p>
+</section>
+<section id="lever-rod">
+<h4>Lever Rod<a class="headerlink" href="#lever-rod" title="Link to this heading">¶</a></h4>
+<div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+  <img src="_static/Lever_Rod_Script.png" alt="Lever_Rod_Script" width="400" />
+  <p style="font-size: 14px; color: gray;">Figure 5: Lever Rod Script</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Lever</span> <span class="pre">Rod</span></code> script uses the position of the lever as input and applies it to the rod, enabling movement that aligns with both the <code class="docutils literal notranslate"><span class="pre">Hinge</span> <span class="pre">Joint</span></code> and the user’s hand movement. This ensures a more realistic and seamless interaction.</p>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="haptikos-slider">
+<h2>Haptikos Slider<a class="headerlink" href="#haptikos-slider" title="Link to this heading">¶</a></h2>
+<div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+  <img src="_static/Haptikos_Slider.png" alt="Haptikos_Slider" width="200" />
+  <p style="font-size: 14px; color: gray;">Figure 1: Haptikos Slider</p>
+</div>
+<p>The slider also doesn’t rely on physics for its functionality; it can be used as a tool to increase or decrease values for certain applications.</p>
+<section id="haptikos-slider-hierarchy-and-scripts">
+<h3>Haptikos Slider Hierarchy and Scripts<a class="headerlink" href="#haptikos-slider-hierarchy-and-scripts" title="Link to this heading">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Haptikos</span> <span class="pre">Slider</span></code> has the following hierarchy:</p>
+<div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+  <img src="_static/Haptikos_Slider_Hierarchy.png" alt="Haptikos_Slider_Hierarchy" width="400" />
+  <p style="font-size: 14px; color: gray;">Figure 2: Haptikos Slider Hierarchy</p>
+</div>
+<p>The slider has the following scripts:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Haptikos_Slider</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SliderHapticFeedbackHandler</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HapticFeedback</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HandDetector</span></code></p></li>
+</ul>
+<section id="id2">
+<h4>Haptikos Slider<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h4>
+<p>First of all, <code class="docutils literal notranslate"><span class="pre">Haptikos_Slider</span></code> is the main component and it gives out two Unity Events:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">OnSliderValueChanged</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">OnSliderSnap</span></code></p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">OnSliderValueChanged</span></code> event is invoked when the slider changes value and it also gives out the value of the new slider location.</p>
+<p><code class="docutils literal notranslate"><span class="pre">OnSliderSnap</span></code> invokes when the slider snaps to a different value, without giving a value, just by indicating that the Slider changed location.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Haptikos_Slider</span></code> handles the logic required for interacting with the slider. It requires at least one finger and the thumb to grab the slider. Once held, the slider can be moved up and down by adjusting the hand’s position. As the slider is moved, it snaps to the nearest indication value (e.g., 20) when within proximity. If the hand moves away beyond the acceptable grab distance, the slider must be grabbed again to continue interaction.</p>
+</section>
+<section id="sliderhapticfeedbackhandler">
+<h4>SliderHapticFeedbackHandler<a class="headerlink" href="#sliderhapticfeedbackhandler" title="Link to this heading">¶</a></h4>
+<p>The next scripts are located in the <code class="docutils literal notranslate"><span class="pre">Moving_Handle</span></code> GameObject.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">SliderHapticFeedbackHandler</span></code> manages the <code class="docutils literal notranslate"><span class="pre">HapticFeedback</span></code> script and logic for the slider. Haptic feedback is triggered when the slider is grabbed and when the slider snaps to a new indication. This script relies on the <code class="docutils literal notranslate"><span class="pre">HandDetector</span></code> script and the <code class="docutils literal notranslate"><span class="pre">OnTriggerEnter</span></code> function to detect when the handle is touched.</p>
+</section>
+<section id="handdetector">
+<h4>HandDetector<a class="headerlink" href="#handdetector" title="Link to this heading">¶</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">HandDetector</span></code> is a general-purpose script that detects which hand is closest to a specified object. It provides customization for defining the acceptable distance for a hand to be considered close enough and configuring the number of fingers detected for object manipulation. The script has the following events:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">OnHandWithinAcceptableDistance</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">OnFingerWithinAcceptableDistance</span></code></p></li>
+</ul>
+<p>These events trigger when the user’s hand and fingers are within an acceptable distance of the object.</p>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="haptikos-grabbable-object">
+<h2>Haptikos Grabbable Object<a class="headerlink" href="#haptikos-grabbable-object" title="Link to this heading">¶</a></h2>
+<p>The final interactable component, called <code class="docutils literal notranslate"><span class="pre">Grabbable</span></code>, is designed to be used as an object that can be grabbed using the exoskeletons. The SDK contains an example grabbable object—a cube—but any object intended for manipulation can be assigned as a grabbable.</p>
+<div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+  <img src="_static/grab.png" alt="grab" width="400" />
+  <p style="font-size: 14px; color: gray;">Figure 1: Haptikos Grabbable Object Example</p>
+</div>
+<section id="haptikos-grabbable-object-scripts">
+<h3>Haptikos Grabbable Object Scripts<a class="headerlink" href="#haptikos-grabbable-object-scripts" title="Link to this heading">¶</a></h3>
+<div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+  <img src="_static/Grabbable.png" alt="Grabbable" width="600" />
+  <p style="font-size: 14px; color: gray;">Figure 2: Haptikos Grabbable Object Scripts</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Grabbable</span></code> contains two scripts:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Haptikos_Grab</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HapticFeedback</span></code></p></li>
+</ul>
+<section id="haptikos-grab">
+<h4>Haptikos Grab<a class="headerlink" href="#haptikos-grab" title="Link to this heading">¶</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">Haptikos_Grab</span></code> component includes a boolean property named <code class="docutils literal notranslate"><span class="pre">Palm</span> <span class="pre">Needed</span></code>. When set to true, the user must use their palm to grab the GameObject. The <code class="docutils literal notranslate"><span class="pre">Haptikos_Grab</span></code> script creates a clone of the grabbable object that is slightly larger (a 10% increase in size). This ensures the object gives the illusion that fingers do not pass through it when grabbed. Additionally, the script clones the object’s collider (preferably a mesh collider), marks it as a trigger, and attaches a script called <code class="docutils literal notranslate"><span class="pre">Haptikos_Clone_Grab</span></code> to the cloned object. This script handles all the grab logic for the interaction.</p>
+</section>
+<section id="haptikos-clone-grab">
+<h4>Haptikos Clone Grab<a class="headerlink" href="#haptikos-clone-grab" title="Link to this heading">¶</a></h4>
+<div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+  <img src="_static/Grabbable_Clone_Grab.png" alt="Grabbable_Clone_Grab" width="400" />
+  <p style="font-size: 14px; color: gray;">Figure 3: Haptikos Grabbable Object Clone Creation</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Haptikos_Clone_Grab</span></code> script determines which fingers are touching the object by using the <code class="docutils literal notranslate"><span class="pre">OnTriggerEnter</span></code> function. If the thumb and at least one additional finger are detected, the object is grabbed and becomes a child of the hand currently interacting with it.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Grabbable</span></code> object is highly customizable. Its appearance can be modified by changing the mesh of the GameObject, or the script can be attached to any GameObject to make it grabbable.</p>
+</section>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="Gestures.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Gestures</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="HaptikosPlayerDescription.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Description of the Haptikos Player Prefab and Its Role</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Haptikos
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Interactable Objects</a><ul>
+<li><a class="reference internal" href="#haptikos-table-button">Haptikos Table Button</a><ul>
+<li><a class="reference internal" href="#haptikos-table-button-hierarchy-and-scripts">Haptikos Table Button Hierarchy and Scripts</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#haptikos-dimmer">Haptikos Dimmer</a><ul>
+<li><a class="reference internal" href="#haptikos-dimmer-hierarchy-and-scripts">Haptikos Dimmer Hierarchy and Scripts</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#haptikos-table-switch">Haptikos Table Switch</a><ul>
+<li><a class="reference internal" href="#haptikos-table-switch-hierarchy-and-scripts">Haptikos Table Switch Hierarchy and Scripts</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#haptikos-wall-switch">Haptikos Wall Switch</a><ul>
+<li><a class="reference internal" href="#haptikos-wall-switch-hierarchy-and-scripts">Haptikos Wall Switch Hierarchy and Scripts</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#haptikos-lever">Haptikos Lever</a><ul>
+<li><a class="reference internal" href="#haptikos-lever-hierarchy-and-scripts">Haptikos Lever Hierarchy and Scripts</a><ul>
+<li><a class="reference internal" href="#id1">Haptikos Lever</a></li>
+<li><a class="reference internal" href="#lever-handle">Lever Handle</a></li>
+<li><a class="reference internal" href="#lever-rod">Lever Rod</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#haptikos-slider">Haptikos Slider</a><ul>
+<li><a class="reference internal" href="#haptikos-slider-hierarchy-and-scripts">Haptikos Slider Hierarchy and Scripts</a><ul>
+<li><a class="reference internal" href="#id2">Haptikos Slider</a></li>
+<li><a class="reference internal" href="#sliderhapticfeedbackhandler">SliderHapticFeedbackHandler</a></li>
+<li><a class="reference internal" href="#handdetector">HandDetector</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#haptikos-grabbable-object">Haptikos Grabbable Object</a><ul>
+<li><a class="reference internal" href="#haptikos-grabbable-object-scripts">Haptikos Grabbable Object Scripts</a><ul>
+<li><a class="reference internal" href="#haptikos-grab">Haptikos Grab</a></li>
+<li><a class="reference internal" href="#haptikos-clone-grab">Haptikos Clone Grab</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=8a448e45"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=5fa4622c"></script>
+    </body>
+</html>
